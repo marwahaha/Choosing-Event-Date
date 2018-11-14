@@ -142,6 +142,7 @@ while True:
 
 #Analysis--------------------------------
 datetimes = []
+memory = []
 for i in range(100):
     datetimes.clear()
     for index, cur in enumerate(main):
@@ -228,25 +229,32 @@ for i in range(100):
         if j == 0:
             temp = original_dt[j]
             continue
-       
-        if original_dt[j][1].date() == temp[2].date() + datetime.timedelta(1) and temp[3] == original_dt[j][3] == "Full day":
-            #Combine
-            ne = original_dt[j][2]
-            ns = temp[1]
-            dt = ne - ns
-            r = temp[3]
-            temp = (dt, ns, ne, r)
-        else:
+        try:
+            if original_dt[j][1].date() == temp[2].date() + datetime.timedelta(1) and temp[3] == original_dt[j][3] == "Full day":
+                #Combine
+                ne = original_dt[j][2]
+                ns = temp[1]
+                dt = ne - ns
+                r = temp[3]
+                temp = (dt, ns, ne, r)
+            else:
+                datetimes.append(temp)
+                #start new chain
+                temp = original_dt[j]
+        except:
             datetimes.append(temp)
             #start new chain
             temp = original_dt[j]
-            
+        
+                
         if j == len(original_dt) -1:
             #if last chain, append
             datetimes.append(temp)
+    
             
-    if len(datetimes)  == 1:
+    if memory == datetimes:
         break
+    memory = datetimes.copy()
     #datetimes.sort(reverse = True)
     print ("Possible Timings with", i, "or less people unavailable:")
     table = PrettyTable()
@@ -258,14 +266,4 @@ for i in range(100):
             '''
         table.add_row([r, dt, s.strftime('%d of %b %y, %I %M %p'), e.strftime('%d of %b %Y, %I %M %p')])
     print (table)
-    
 
-    
-
-'''
-Input Format
-n
-y m d h m       y m d h m
-
-
-'''
