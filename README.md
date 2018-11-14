@@ -40,4 +40,33 @@ In this example,
 2. The event is only allowed to be between 8 am to 10 pm each day.
 3. The event is only allowed to occur on weekends.
 
+Larger Example
+<pre>
+12 nov 2018 4:00 pm 16 nov 2018 11:59 pm
 
+12 nov 2018 1:00 pm 12 nov 2018 4:00 pm
+14 nov 2018 3:00 pm 14 nov 2018 6:00 pm
+16 nov 2018 1:00 pm 16 nov 2018 4:00 pm
+
+13 nov 2018 5:30 pm 13 nov 2018 7:30 pm
+14 nov 2018 5:30 pm 14 nov 2018 7:30 pm
+15 nov 2018 5:30 pm 15 nov 2018 7:30 pm
+16 nov 2018 5:30 pm 16 nov 2018 7:30 pm
+
+12 nov 2018 9:00 am 12 nov 2018 11:00 am
+14 nov 2018 2:00 pm 14 nov 2018 5:00 pm
+16 nov 2018 2:00 pm 16 nov 2018 5:00 pm
+
+12 nov 2018 9:00 am 12 nov 2018 4:30 pm
+14 nov 2018 2:00 pm 14 nov 2018 5:00 pm
+
+14 nov 2018 3:00 pm 14 nov 2018 5:00 pm
+16 nov 2018 3:00 pm 16 nov 2018 5:00 pm
+
+13 nov 2018 3:30 pm 13 nov 2018 6:30 pm
+16 nov 2018 3:30 pm 16 nov 2018 6:30 pm
+
+14 nov 2018 3:00 pm 14 nov 2018 5:00 pm
+15 nov 2018 9:00 am 15 nov 2018 11:00 am
+break
+</pre>
