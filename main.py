@@ -145,7 +145,7 @@ datetimes = []
 for i in range(100):
     datetimes.clear()
     for index, cur in enumerate(main):
-        if cur[1] != i:
+        if cur[1] > i:
             continue
         if index == len(main) -1:
             break
@@ -158,7 +158,6 @@ for i in range(100):
             if end > start and not (start.time() ==  start_time and end.time() == end_time):
                 datetimes.append((end-start, start, end, "Half Day"))
 
-                
                        
             #Full days
             start_day = main[index][0].date() + datetime.timedelta(days = 1)
@@ -187,11 +186,69 @@ for i in range(100):
                 else:
                     datetimes.append ((end- start, start,end, "Half Day"))
 
+#---------------------------combining adjacent free accepted blocks
+    original_dt = datetimes.copy()
+    datetimes.clear()
+    collecting = False
+    for j in range(len(original_dt)):
+        
+        if j == 0:
+            temp = original_dt[j]
+            continue
+        ldt = temp[2]
+        if original_dt[j][1] == ldt:
+            #Combine
+            ne = original_dt[j][2]
+            ns = temp[1]
+            dt = ne - ns
+            r = temp[3]
+            temp = (dt, ns, ne, r)
+        else:
+            #append
+            dt, ns, ne, r = temp
+            if ne - ns  == datetime.datetime.combine(datetime.date.today(), end_time) - datetime.datetime.combine( datetime.date.today(), start_time):
+                r = "Full day"
+                temp = (dt, ns, ne, r)
+            datetimes.append(temp)
+            #start new chain
+            temp = original_dt[j]
+            
+        if j == len(original_dt) -1:
+            #if last chain, append
+            if ne - ns  == datetime.datetime.combine(datetime.date.today(), end_time) - datetime.datetime.combine( datetime.date.today(), start_time):
+                r = "Full day"
+                temp = (dt, ns, ne, r)
+            datetimes.append(temp)
 
-    if len(datetimes)  == 0:
+#Round 2 combo (full day combos)
+    original_dt = datetimes.copy()
+    datetimes.clear()
+    for j in range(len(original_dt)):
+        
+        if j == 0:
+            temp = original_dt[j]
+            continue
+       
+        if original_dt[j][1].date() == temp[2].date() + datetime.timedelta(1) and temp[3] == original_dt[j][3] == "Full day":
+            #Combine
+            ne = original_dt[j][2]
+            ns = temp[1]
+            dt = ne - ns
+            r = temp[3]
+            temp = (dt, ns, ne, r)
+        else:
+            datetimes.append(temp)
+            #start new chain
+            temp = original_dt[j]
+            
+        if j == len(original_dt) -1:
+            #if last chain, append
+            datetimes.append(temp)
+            
+    if len(datetimes)  == 1:
         break
     #datetimes.sort(reverse = True)
-    print ("Possible Timings with", i, "people unavailable:")
+    print ("Possible Timings with", i, "or less people unavailable:")
     table = PrettyTable()
     table.field_names = ["Type", "Duration", "Start", "End"]
     for dt, s, e, r in datetimes:
