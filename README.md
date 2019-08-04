@@ -14,10 +14,10 @@ Please Note: This is very very buggy :(...
 
 **Formatting**
 1. A datetime is the combination of a date and a time.
-2. All datetimes are in the format (day month year hour:min am/pm) where month is the 3 letter abreviation for each month (E.g. '14 nov 2018 12:00 pm').
+2. All datetimes are in the format (day month year hour:min am/pm) where month is the 3 letter abbreviation for each month (E.g. '14 nov 2018 12:00 pm').
 3. The first line contains 2 datetimes, *s* and *e*. *s* is the earliest date time possible to start the even.*e* is the latest possible time to end the event. 
 4. The time of *s* and the time of *e* are the earliest and latest times the event being planned can start or end.
-4. The second line contains abreviations of days of the week (first 3 letters of each day). These days indicate days of the week which are to be blocked off. E.g. writing 'sun mon' would block sundays and mondays from appearing in the results.
+4. The second line contains abbreviations of days of the week (first 3 letters of each day). These days indicate days of the week which are to be blocked off. E.g. writing 'sun mon' would block sundays and mondays from appearing in the results.
 5. The next (as many as you like) lines each consist of 2 datetimes (e.g. '3 dec 2018 12:00 am 11 dec 2018 11:00 pm'). These would be the start and end datetimes a person would not be able to attend the event being planned.
 6. The last line is a 'break' to signal for the program to stop reading the file.
 
